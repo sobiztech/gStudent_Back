@@ -37,7 +37,7 @@ class EmployeesController extends Controller
         $employees->employee_code=$request->employee_code;
         $employees->employee_first_name=$request->employee_first_name;
         $employees->employee_sur_name=$request->employee_sur_name;
-        $employees->nic=$request->nic;
+        $employees->employee_nic=$request->employee_nic;
         $employees->date_of_birth=$request->date_of_birth;
         $employees->gender=$request->gender;
         $employees->email=$request->email;
@@ -67,7 +67,7 @@ class EmployeesController extends Controller
         $employees->employee_code=$request->employee_code;
         $employees->employee_first_name=$request->employee_first_name;
         $employees->employee_sur_name=$request->employee_sur_name;
-        $employees->nic=$request->nic;
+        $employees->employee_nic=$request->employee_nic;
         $employees->date_of_birth=$request->date_of_birth;
         $employees->gender=$request->gender;
         $employees->email=$request->email;
@@ -99,7 +99,7 @@ class EmployeesController extends Controller
                     'employees.employee_code',
                     'employees.employee_first_name',
                     'employees.employee_sur_name',
-                    'employees.nic',
+                    'employees.employee_nic',
                     'employees.date_of_birth',
                     'employees.gender',
                     'employees.email',
@@ -132,7 +132,7 @@ class EmployeesController extends Controller
                     'employees.employee_code',
                     'employees.employee_first_name',
                     'employees.employee_sur_name',
-                    'employees.nic',
+                    'employees.employee_nic',
                     'employees.date_of_birth',
                     'employees.gender',
                     'employees.email',

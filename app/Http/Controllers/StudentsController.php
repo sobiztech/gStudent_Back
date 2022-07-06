@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Students;
 use Illuminate\Http\Request;
+use App\Http\Controllers\PaymentDetailsController;
+use App\Http\Controllers\GuardiansController;
 
 class StudentsController extends Controller
 {
     public function store(Request $request)
     {
+        $guardian_controller = new GuardiansController;
+
         $rules = array(
             'student_code' => 'unique:students,student_code',
             'student_nic' => 'unique:students,student_nic',
@@ -47,8 +51,19 @@ class StudentsController extends Controller
         $students->image=$request->image;
         $students->description=$request->description;
         $students->branch_id=$request->branch_id;
-        $students->guardian_id=$request->guardian_id;
         $students->save();
+
+        $last_save_student_id=Guardians::Find($id);
+
+        $guardian_array = [
+            'guardian_code' => $request->guardian_code,
+            'guardian_name' =>  $request->guardian_name,
+            'guardian_nic' =>  $request->guardian_nic,
+            'guardian_contact_number' => $request->guardian_contact_number,
+            'description' => $request->description,
+            'student_id' => $last_save_student_id,
+        ];
+        $guardian_controller->store($guardian_array);
 
         $data = [
             'is_create' => true,
@@ -76,7 +91,6 @@ class StudentsController extends Controller
         $students->image=$request->image;
         $students->description=$request->description;
         $students->branch_id=$request->branch_id;
-        $students->guardian_id=$request->guardian_id;
         $students->update();
 
         return $students;
@@ -107,16 +121,8 @@ class StudentsController extends Controller
                 'students.description',
                 'branches.id',
                 'branches.branch_code',
-                'branches.branch_name',
-                'guardians.id',
-                'guardians.guardian_code',
-                'guardians.guardian_name',
-                'guardians.guardian_contact_number',
-                'guardian_types.id',
-                'guardian_types.guardian_type_name')
+                'branches.branch_name')
                 ->join('branches', 'students.branch_id', '=', 'branches.id')
-                ->join('guardians', 'students.guardian_id', '=', 'guardians.id')
-                ->join('guardian_types', 'guardians.guardian_type_id', '=', 'guardian_types.id')
                 ->get();
 
         return $students;
@@ -141,16 +147,8 @@ class StudentsController extends Controller
                 'students.description',
                 'branches.id',
                 'branches.branch_code',
-                'branches.branch_name',
-                'guardians.id',
-                'guardians.guardian_code',
-                'guardians.guardian_name',
-                'guardians.guardian_contact_number',
-                'guardian_types.id',
-                'guardian_types.guardian_type_name')
+                'branches.branch_name')
                 ->join('branches', 'students.branch_id', '=', 'branches.id')
-                ->join('guardians', 'students.guardian_id', '=', 'guardians.id')
-                ->join('guardian_types', 'guardians.guardian_type_id', '=', 'guardian_types.id')
                 ->where('students.id','=',$id)
                 ->get();
 

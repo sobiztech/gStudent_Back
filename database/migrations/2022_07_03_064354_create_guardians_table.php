@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('guardian_contact_number',50);
             $table->longText('description')->nullable();
             $table->integer('guardian_type_id')->unsigned();
+            $table->integer('student_id')->unsigned();
             $table->timestamps();
             $table->foreign('guardian_type_id')->references('id')->on('guardian_types')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

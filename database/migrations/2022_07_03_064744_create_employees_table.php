@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('employee_code',50)->unique();
             $table->string('employee_first_name',50);
             $table->string('employee_sur_name',50);
-            $table->string('nic',12)->unique();
+            $table->string('employee_nic',12)->unique();
             $table->date('date_of_birth');
             $table->integer('gender');
             $table->string('email',50)->unique()->nullable();

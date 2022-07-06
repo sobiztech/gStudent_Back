@@ -38,6 +38,7 @@ class GuardiansController extends Controller
         $guardian->guardian_nic=$request->guardian_nic;
         $guardian->guardian_contact_number=$request->guardian_contact_number;
         $guardian->description=$request->description;
+        $guardian->student_id=$request->student_id;
         $guardian->save();
 
         $data = [
@@ -58,6 +59,7 @@ class GuardiansController extends Controller
         $guardian->guardian_nic=$request->guardian_nic;
         $guardian->guardian_contact_number=$request->guardian_contact_number;
         $guardian->description=$request->description;
+        $guardian->student_id=$request->student_id;
         $guardian->update();
 
         return $guardian;
@@ -80,8 +82,13 @@ class GuardiansController extends Controller
                 'guardians.guardian_nic',
                 'guardians.guardian_contact_number',
                 'guardian_types.id',
-                'guardian_types.guardian_type_name' )
+                'guardian_types.guardian_type_name',
+                'students.id',
+                'students.student_code',
+                'students.student_first_name',
+                'students.student_sur_name' )
                 ->join('guardian_types', 'guardians.guardian_type_id', '=', 'guardian_types.id')
+                ->join('students', 'guardians.student_id', '=', 'students.id')
                 ->get();
 
         return $guardians;
@@ -98,8 +105,13 @@ class GuardiansController extends Controller
                 'guardians.guardian_nic',
                 'guardians.guardian_contact_number',
                 'guardian_types.id',
-                'guardian_types.guardian_type_name')
+                'guardian_types.guardian_type_name',
+                'students.id',
+                'students.student_code',
+                'students.student_first_name',
+                'students.student_sur_name' )
                 ->join('guardian_types', 'guardians.guardian_type_id', '=', 'guardian_types.id')
+                ->join('students', 'guardians.student_id', '=', 'students.id')
                 ->where('guardians.id','=',$id)
                 ->get();
 

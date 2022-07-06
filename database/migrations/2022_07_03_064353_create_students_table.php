@@ -28,10 +28,8 @@ return new class extends Migration
             $table->longText('image');
             $table->longText('description')->nullable();
             $table->integer('branch_id')->unsigned();
-            $table->integer('guardian_id')->unsigned();
             $table->timestamps();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            $table->foreign('guardian_id')->references('id')->on('guardians')->onDelete('cascade');
         });
     }
 
