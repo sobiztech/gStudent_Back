@@ -9,6 +9,7 @@ class UsersController extends Controller
 {
     public function store(Request $request)
     {
+        // test
         $rules = array(
             'email' => 'unique:users,email',
         );
